@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from scipy.stats import chi2_contingency, ttest_ind
 
-# -----------------------------
+
 # 1. Load the scored data
 # -----------------------------
 df = pd.read_csv("data/clean_output/df_complete_scores.csv")
 print("Data loaded. Shape:", df.shape)
 
-# -----------------------------
+
 # 2. Grad curriculum vs HD preparedness
 # -----------------------------
 df_corr = df[(df["Grad_Curriculum"] >= 1) & (df["HD_Preparedness"] >= 1)]
@@ -24,8 +24,8 @@ plt.ylabel("HD Preparedness Score")
 plt.tight_layout()
 plt.show()
 
-# -----------------------------
-# 3. Graduation timing vs graduate coursework (Q53 option 3)
+
+# 3. Graduation timing vs graduate coursework 
 # -----------------------------
 df_q53 = df.dropna(subset=["Q9", "Q53"]).copy()
 df_q53["Q9"] = pd.to_numeric(df_q53["Q9"], errors="coerce")
@@ -61,7 +61,7 @@ print("Chi-square statistic:", round(chi2,3))
 print("p-value:", round(p,4))
 print(contingency)
 
-# -----------------------------
+
 # 4. Graduate school settings (Q14) vs HD preparedness
 # -----------------------------
 df_q14 = df.dropna(subset=["Q14"]).copy()
@@ -90,7 +90,7 @@ for s in settings:
         t_stat, p_val = ttest_ind(yes_group, no_group, equal_var=False)
         print(f"Setting {s} t-test: t={round(t_stat,3)}, p={round(p_val,4)}")
 
-# -----------------------------
+
 # 5. HD Exposure vs HD Preparedness
 # -----------------------------
 df_exp = df[(df["HD_Exposure"] >= 1) & (df["HD_Preparedness"] >= 1)].copy()
